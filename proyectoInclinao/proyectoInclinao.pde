@@ -6,9 +6,12 @@ el color mode está en hsb (usar adobeColor)
 para la interfaz https://web.media.mit.edu/~cassiano/projects/cards_ui/index.html#input-text
 */
 
+import processing.serial.*;
 import processing.sound.*;
+
 SoundFile file;
 PImage img;
+Serial myPort;
 
 //ParametrosFondo
 int pLifeTime = 150;
@@ -62,6 +65,8 @@ void setup() {
   img.resize(anchoGuante, altoGuante);
   xGuante=(width/2)-(anchoGuante/2);
   yGuante=(height/2)-(altoGuante/2);
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600);
 }
 
 void draw() {
@@ -167,19 +172,14 @@ public void dibujarCirculos(){
 void mouseClicked(){
   checkIfCard();
   if(is1){
-    print("pulgar");
     actual=1;
   }else if(is2){
-    print("indice");
     actual=2;
   }else if(is3){
-    print("corazon");
     actual=3;
   }else if(is4){
-    print("anular");
     actual=4;
   }else if(is5){
-    print("meñique");
     actual=5;
   }else if(isCard){
     //actual no cambia
@@ -197,8 +197,7 @@ public void checkIfCard(){
 
 }
 
-boolean a = false;
-float slider = 0.5f;
+boolean tierra1=true,tierra2=false,tierra3=false,tierra4=false,tierra5=false;
 
 public void dibujarCard(){
   cardX=width/2-(cardW/2);
@@ -207,9 +206,11 @@ public void dibujarCard(){
   switch(actual){
     case 1:
       title="pulgar";
+      cardPulgar();
       break;
     case 2:
       title="indice";
+      cardIndice();
       break;
     case 3:
       title="corazon";
@@ -224,14 +225,86 @@ public void dibujarCard(){
       title="";
       break;
   }
-  if(title!=""){
-    beginCard(title,cardX,cardY,cardW,cardH);
-    a=Toggle("Tierra",a,card_x+10,card_y+30,60,30);
-    if(!a){
-      slider = Slider(slider,card_x+10,card_y+80);
-    }
-    endCard();
-  } 
+}
+
+String avisoPulgar= "Este dedo actua como tierra";
+void cardPulgar(){
+  beginCard(title,cardX,cardY,cardW,cardH);
+  fill(color(255));
+  textSize(30);
+  text(avisoPulgar,card_x+textWidth(avisoPulgar)/2+cardW/6,card_y+cardH/3);
+  endCard();
+}
+
+int xInicial=10;
+int espaciado = 120;
+int interlineado = 40;
+void cardIndice(){
+  beginCard(title,cardX,cardY,cardW,cardH+20);
+  
+  if(Button("DO", cardX+xInicial, cardY+50)){
+     myPort.write("A");
+  }
+  if(Button("DO#", cardX+xInicial+espaciado, cardY+50)){
+     myPort.write("B");
+  }
+  if(Button("RE", cardX+xInicial+espaciado*2, cardY+50)){
+     myPort.write("C");
+  }
+  if(Button("RE#", cardX+xInicial+espaciado*3, cardY+50)){
+     myPort.write("D");
+  }
+  if(Button("MI", cardX+xInicial+espaciado*4, cardY+50)){
+     myPort.write("E");
+  }
+  if(Button("FA", cardX+xInicial, cardY+50+interlineado)){
+     myPort.write("F");
+  }
+  if(Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado)){
+     myPort.write("G");
+  }
+  if(Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado)){
+     myPort.write("H");
+  }
+  if(Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado)){
+     myPort.write("I");
+  }
+  if(Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado)){
+     myPort.write("J");
+  }
+  if(Button("LA#", cardX+xInicial, cardY+50+interlineado*2)){
+     myPort.write("K");
+  }
+  if(Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2)){
+     myPort.write("L");
+  }
+  if(Button("DO(agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2)){
+     myPort.write("M");
+  }
+  if(Button("DO#(agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2)){
+     myPort.write("N");
+  }
+  if(Button("RE(agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2)){
+     myPort.write("O");
+  }
+  if(Button("RE#(agudo)", cardX+xInicial, cardY+50+interlineado*3)){
+     myPort.write("P");
+  }
+  if(Button("MI(agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3)){
+     myPort.write("Q");
+  }
+  if(Button("FA(agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3)){
+     myPort.write("R");
+  }
+  if(Button("FA#(agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3)){
+     myPort.write("S");
+  }
+  if(Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3)){
+     myPort.write("T");
+  }
+  
+  
+  endCard();
 }
 
 
