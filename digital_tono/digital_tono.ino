@@ -1,4 +1,4 @@
-String val;
+String s, dedo;
 char modo;
 
 void setup()
@@ -10,11 +10,13 @@ void setup()
 void loop()
 {
   while(Serial.available()) { // If data is available to read,
-    val = Serial.readStringUntil(' '); // read it and store it in val
-    if (val == "I") {
-      int puerto = Serial.readStringUntil(' ').toInt();
-      float tono = Serial.readStringUntil('\n').toFloat();
-      tone(puerto, tono);
-    }
+    s = Serial.readStringUntil('\n'); // read it and store it in val
+    
+    int puerto = s.substring(0, s.indexOf(',')).toInt();
+    Serial.println(puerto);
+    float tono = s.substring(s.indexOf(',')+1).toFloat();
+    Serial.println(tono);
+    tone(puerto, tono);
+    
   }
 }

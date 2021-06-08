@@ -192,7 +192,7 @@ void mouseClicked(){
   
   if (actual == 2) {
     float tono = calcularTono();
-    myPort.write("I 3 " + Float.toString(tono));
+    myPort.write("3," + Float.toString(tono) + "\n");
   }
 }
 
@@ -271,205 +271,92 @@ void cardIndice(){
   Button("FA# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3);
   Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3);
   
-  
-  
-  /*if(Button("DO", cardX+xInicial, cardY+50)){
-     myPort.write("I");
-     myPort.write(Float.toString(2.5));
-  }
-  if(Button("DO#", cardX+xInicial+espaciado, cardY+50)){
-     myPort.write("B");
-  }
-  if(Button("RE", cardX+xInicial+espaciado*2, cardY+50)){
-     myPort.write("C");
-  }
-  if(Button("RE#", cardX+xInicial+espaciado*3, cardY+50)){
-     //myPort.write("D");
-  }
-  if(Button("MI", cardX+xInicial+espaciado*4, cardY+50)){
-     //myPort.write("E");
-  }
-  if(Button("FA", cardX+xInicial, cardY+50+interlineado)){
-     //myPort.write("F");
-  }
-  if(Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado)){
-     myPort.write("G");
-  }
-  if(Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado)){
-     myPort.write("H");
-  }
-  if(Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado)){
-     myPort.write("I");
-  }
-  if(Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado)){
-     myPort.write("J");
-  }
-  if(Button("LA#", cardX+xInicial, cardY+50+interlineado*2)){
-     myPort.write("K");
-  }
-  if(Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2)){
-     myPort.write("L");
-  }
-  if(Button("DO(agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2)){
-     myPort.write("M");
-  }
-  if(Button("DO#(agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2)){
-     myPort.write("N");
-  }
-  if(Button("RE(agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2)){
-     myPort.write("O");
-  }
-  if(Button("RE#(agudo)", cardX+xInicial, cardY+50+interlineado*3)){
-     myPort.write("P");
-  }
-  if(Button("MI(agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3)){
-     myPort.write("Q");
-  }
-  if(Button("FA(agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3)){
-     myPort.write("R");
-  }
-  if(Button("FA#(agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3)){
-     myPort.write("S");
-  }
-  if(Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3)){
-     myPort.write("T");
-  }*/
-  
-  
   endCard();
 }
 
 public float calcularTono() {
-  /*
-  
-  Button("DO", cardX+xInicial, cardY+50);
-  Button("DO#", cardX+xInicial+espaciado, cardY+50);
-  Button("RE", cardX+xInicial+espaciado*2, cardY+50);
-  Button("RE#", cardX+xInicial+espaciado*3, cardY+50);
-  Button("MI", cardX+xInicial+espaciado*4, cardY+50);
-  Button("FA", cardX+xInicial, cardY+50+interlineado);
-  Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado);
-  Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado);
-  Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado);
-  Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado);
-  Button("LA#", cardX+xInicial, cardY+50+interlineado*2);
-  Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2);
-  Button("DO (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2);
-  Button("DO# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2);
-  Button("RE (agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2);
-  Button("RE# (agudo)", cardX+xInicial, cardY+50+interlineado*3);
-  Button("MI (agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3);
-  Button("FA (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3);
-  Button("FA# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3);
-  Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3);
-  
-  s_med = 100
-  s_height = 30
-  */
   
   // DO
   if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
       (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        println("Devuelvo tono");
         return 523.26;
   } // DO #
   else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
       (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        println("Devuelvo tono");
         return 554.37;
   } // RE
   else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
       (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        println("Devuelvo tono");
         return 587.33;
   } // RE #
   else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
       (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        println("Devuelvo tono");
         return 622.25;
   } // MI
   else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
       (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        println("Devuelvo tono");
         return 659.26;
   } // FA
   else if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
       (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        println("Devuelvo tono");
         return 698.46;
   } // FA #
   else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
       (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        println("Devuelvo tono");
         return 739.99;
   } // SOL
   else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
       (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        println("Devuelvo tono");
         return 783.99;
   } // SOL #
   else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
       (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        println("Devuelvo tono");
         return 830.61;
   } // LA
   else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
       (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        println("Devuelvo tono");
         return 880.00;
   } // LA #
   else if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
       (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        println("Devuelvo tono");
         return 932.33;
   } // SI
   else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
       (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        println("Devuelvo tono");
         return 987.77;
   } // DO (agudo)
   else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
       (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        println("Devuelvo tono");
         return 1046.50;
   } // DO # (agudo)
   else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
       (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        println("Devuelvo tono");
         return 1108.73;
   } // RE (agudo)
   else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
       (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        println("Devuelvo tono");
         return 1174.66;
   } // RE # (agudo)
   else if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
       (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        println("Devuelvo tono");
         return 1244.51;
   } // MI (agudo)
   else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
       (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        println("Devuelvo tono");
         return 1318.51;
   } // FA (agudo)
   else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
       (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        println("Devuelvo tono");
         return 1396.91;
   } // FA # (agudo)
   else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
       (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        println("Devuelvo tono");
         return 1479.98;
-  }
-  // PAUSA
+  }// PAUSA
   else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
       (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        println("Devuelvo tono");
         return 3000;
   }
-  println("Hola");
   return 0.0;
 }
 
