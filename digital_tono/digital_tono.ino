@@ -11,6 +11,16 @@ void loop()
   while(Serial.available()) { // If data is available to read,
     val = Serial.read(); // read it and store it in val
   }
+  
+  if (val == 'I'){
+    Serial.println(val);
+    int c;
+    while (Serial.available()){
+      c = Serial.read();
+      //Serial.println(c);
+    }
+    
+  }
   if(val=='A'){
     tone(3,523.25);
   }

@@ -65,7 +65,9 @@ void setup() {
   img.resize(anchoGuante, altoGuante);
   xGuante=(width/2)-(anchoGuante/2);
   yGuante=(height/2)-(altoGuante/2);
-  String portName = Serial.list()[0];
+  // String portName = Serial.list()[0];  // Arduino de Xabi
+  String portName = Serial.list()[2];     // Arduino de Ander 
+  println(portName);
   myPort = new Serial(this, portName, 9600);
 }
 
@@ -186,6 +188,12 @@ void mouseClicked(){
   }else{
     actual=-1;
   }
+  
+  if (actual == 2) {
+    myPort.write("I");
+    float tono = calcularTono();
+    myPort.write(Float.toString(tono));
+  }
 }
 
 public void checkIfCard(){
@@ -242,7 +250,30 @@ int interlineado = 40;
 void cardIndice(){
   beginCard(title,cardX,cardY,cardW,cardH+20);
   
-  if(Button("DO", cardX+xInicial, cardY+50)){
+  Button("DO", cardX+xInicial, cardY+50);
+  Button("DO#", cardX+xInicial+espaciado, cardY+50);
+  Button("RE", cardX+xInicial+espaciado*2, cardY+50);
+  Button("RE#", cardX+xInicial+espaciado*3, cardY+50);
+  Button("MI", cardX+xInicial+espaciado*4, cardY+50);
+  Button("FA", cardX+xInicial, cardY+50+interlineado);
+  Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado);
+  Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado);
+  Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado);
+  Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado);
+  Button("LA#", cardX+xInicial, cardY+50+interlineado*2);
+  Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2);
+  Button("DO (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2);
+  Button("DO# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2);
+  Button("RE (agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2);
+  Button("RE# (agudo)", cardX+xInicial, cardY+50+interlineado*3);
+  Button("MI (agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3);
+  Button("FA (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3);
+  Button("FA# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3);
+  Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3);
+  
+  
+  
+  /*if(Button("DO", cardX+xInicial, cardY+50)){
      myPort.write("A");
   }
   if(Button("DO#", cardX+xInicial+espaciado, cardY+50)){
@@ -252,13 +283,13 @@ void cardIndice(){
      myPort.write("C");
   }
   if(Button("RE#", cardX+xInicial+espaciado*3, cardY+50)){
-     myPort.write("D");
+     //myPort.write("D");
   }
   if(Button("MI", cardX+xInicial+espaciado*4, cardY+50)){
-     myPort.write("E");
+     //myPort.write("E");
   }
   if(Button("FA", cardX+xInicial, cardY+50+interlineado)){
-     myPort.write("F");
+     //myPort.write("F");
   }
   if(Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado)){
      myPort.write("G");
@@ -301,23 +332,62 @@ void cardIndice(){
   }
   if(Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3)){
      myPort.write("T");
-  }
+  }*/
   
   
   endCard();
 }
 
+public float calcularTono() {
+  /*
+  
+  Button("DO", cardX+xInicial, cardY+50);
+  Button("DO#", cardX+xInicial+espaciado, cardY+50);
+  Button("RE", cardX+xInicial+espaciado*2, cardY+50);
+  Button("RE#", cardX+xInicial+espaciado*3, cardY+50);
+  Button("MI", cardX+xInicial+espaciado*4, cardY+50);
+  Button("FA", cardX+xInicial, cardY+50+interlineado);
+  Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado);
+  Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado);
+  Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado);
+  Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado);
+  Button("LA#", cardX+xInicial, cardY+50+interlineado*2);
+  Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2);
+  Button("DO (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2);
+  Button("DO# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2);
+  Button("RE (agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2);
+  Button("RE# (agudo)", cardX+xInicial, cardY+50+interlineado*3);
+  Button("MI (agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3);
+  Button("FA (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3);
+  Button("FA# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3);
+  Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3);
+  
+  s_med = 100
+  s_height = 30
+  */
+  
+  if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
+      (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
+        println("Devuelvo tono");
+        return 523.25;
+  }
+  println("Hola");
+  return 0.0;
+}
 
 
-
-
-
-
-
-
-
-
-
+void serialEvent(Serial p) {
+  try {
+    // get message till line break (ASCII > 13)
+    String message = p.readStringUntil(13);
+    // just if there is data
+    if (message != null) {
+      println("message received: "+trim(message));
+    }
+  }
+  catch (Exception e) {
+  }
+}
 
 
 
