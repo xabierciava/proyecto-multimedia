@@ -11,12 +11,16 @@ void loop()
 {
   while(Serial.available()) { // If data is available to read,
     s = Serial.readStringUntil('\n'); // read it and store it in val
-    
-    int puerto = s.substring(0, s.indexOf(',')).toInt();
-    Serial.println(puerto);
-    float tono = s.substring(s.indexOf(',')+1).toFloat();
-    Serial.println(tono);
-    tone(puerto, tono);
+    String dedo = s.substring(0, s.indexOf(','));
+    if (dedo == "I") {
+      int puerto = s.substring(s.indexOf(',')+1, s.indexOf(',')+3).toInt();
+      float tono = s.substring(s.indexOf(',')+3).toFloat();
+      tone(puerto, tono);
+    } else if (dedo == "C") {
+      int puerto = s.substring(s.indexOf(',')+1, s.indexOf(',')+3).toInt();
+      float valor = s.substring(s.indexOf(',')+3).toFloat();
+      analogWrite(puerto, valor);
+    }
     
   }
 }

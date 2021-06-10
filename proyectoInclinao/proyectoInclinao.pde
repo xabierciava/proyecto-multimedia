@@ -192,7 +192,7 @@ void mouseClicked(){
   
   if (actual == 2) {
     float tono = calcularTono();
-    myPort.write("3," + Float.toString(tono) + "\n");
+    myPort.write("I,3," + Float.toString(tono) + "\n");
   }
 }
 
@@ -222,6 +222,7 @@ public void dibujarCard(){
       break;
     case 3:
       title="corazon";
+      cardCorazon();
       break;
     case 4:
       title="anular";
@@ -247,6 +248,7 @@ void cardPulgar(){
 int xInicial=10;
 int espaciado = 120;
 int interlineado = 40;
+
 void cardIndice(){
   beginCard(title,cardX,cardY,cardW,cardH+20);
   
@@ -360,6 +362,15 @@ public float calcularTono() {
   return 0.0;
 }
 
+float valor = 1;
+void cardCorazon() {
+  beginCard(title,cardX,cardY,cardW,cardH+20);
+  
+  valor = Slider("Valor: ", 0, 254, valor, cardX+xInicial, cardY+50+30+interlineado, 500, 30);
+  myPort.write("C,5," + valor+"\n");
+  
+  endCard();
+}
 
 void serialEvent(Serial p) {
   try {
