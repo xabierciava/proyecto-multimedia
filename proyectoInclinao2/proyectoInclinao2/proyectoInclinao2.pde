@@ -189,7 +189,7 @@ void mouseClicked(){
     actual=-1;
   }
   
-  if (actual == 2) {
+  /*if (actual == 2) {
     float tono = calcularTono();
     myPort.write("3," + Float.toString(tono) + "\n");
   }
@@ -207,7 +207,7 @@ void mouseClicked(){
   if (actual == 5) {
     float tono = calcularTono();
     myPort.write("9," + Float.toString(tono) + "\n");
-  }
+  }*/
 }
 
 public void checkIfCard(){
@@ -268,114 +268,48 @@ int interlineado = 40;
 void cardDedo(){
   beginCard(title,cardX,cardY,cardW,cardH+20);
   
-  Button("DO", cardX+xInicial, cardY+50);
-  Button("DO#", cardX+xInicial+espaciado, cardY+50);
-  Button("RE", cardX+xInicial+espaciado*2, cardY+50);
-  Button("RE#", cardX+xInicial+espaciado*3, cardY+50);
-  Button("MI", cardX+xInicial+espaciado*4, cardY+50);
-  Button("FA", cardX+xInicial, cardY+50+interlineado);
-  Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado);
-  Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado);
-  Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado);
-  Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado);
-  Button("LA#", cardX+xInicial, cardY+50+interlineado*2);
-  Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2);
-  Button("DO (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2);
-  Button("DO# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2);
-  Button("RE (agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2);
-  Button("RE# (agudo)", cardX+xInicial, cardY+50+interlineado*3);
-  Button("MI (agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3);
-  Button("FA (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3);
-  Button("FA# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3);
-  Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3);
+  if (Button("DO", cardX+xInicial, cardY+50))
+    myPort.write(actual+","+523.26+"\n");
+  if (Button("DO#", cardX+xInicial+espaciado, cardY+50))
+    myPort.write(actual+","+554.37+"\n");
+  if(Button("RE", cardX+xInicial+espaciado*2, cardY+50))
+    myPort.write(actual+","+ 587.33+"\n");
+  if(Button("RE#", cardX+xInicial+espaciado*3, cardY+50))
+    myPort.write(actual+","+622.25+"\n");
+  if(Button("MI", cardX+xInicial+espaciado*4, cardY+50))
+    myPort.write(actual+","+659.26+"\n");
+  if(Button("FA", cardX+xInicial, cardY+50+interlineado))
+    myPort.write(actual+","+698.46+"\n");
+  if(Button("FA#", cardX+xInicial+espaciado, cardY+50+interlineado))
+    myPort.write(actual+","+739.99+"\n");
+  if(Button("SOL", cardX+xInicial+espaciado*2, cardY+50+interlineado))
+    myPort.write(actual+","+783.99+"\n");
+  if(Button("SOL#", cardX+xInicial+espaciado*3, cardY+50+interlineado))
+    myPort.write(actual+","+830.61+"\n");
+  if(Button("LA", cardX+xInicial+espaciado*4, cardY+50+interlineado))
+    myPort.write(actual+","+880.00+"\n");
+  if(Button("LA#", cardX+xInicial, cardY+50+interlineado*2))
+    myPort.write(actual+","+932.33+"\n");
+  if(Button("SI", cardX+xInicial+espaciado, cardY+50+interlineado*2))
+    myPort.write(actual+","+987.77+"\n");
+  if(Button("DO (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*2))
+    myPort.write(actual+","+1046.50+"\n");
+  if(Button("DO# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*2))
+    myPort.write(actual+","+1108.73+"\n");
+  if(Button("RE (agudo)", cardX+xInicial+espaciado*4, cardY+50+interlineado*2))
+    myPort.write(actual+","+1174.66+"\n");
+  if(Button("RE# (agudo)", cardX+xInicial, cardY+50+interlineado*3))
+    myPort.write(actual+","+1244.51+"\n");
+  if(Button("MI (agudo)", cardX+xInicial+espaciado, cardY+50+interlineado*3))
+    myPort.write(actual+","+1318.51+"\n");
+  if(Button("FA (agudo)", cardX+xInicial+espaciado*2, cardY+50+interlineado*3))
+    myPort.write(actual+","+1396.91+"\n");
+  if(Button("FA# (agudo)", cardX+xInicial+espaciado*3, cardY+50+interlineado*3))
+    myPort.write(actual+","+1479.98+"\n");
+  if(Button("PAUSA", cardX+xInicial+espaciado*4, cardY+50+interlineado*3))
+    myPort.write(actual+","+30000+"\n");
   
   endCard();
-}
-
-public float calcularTono() {
-  
-  // DO
-  if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
-      (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        return 523.26;
-  } // DO #
-  else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
-      (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        return 554.37;
-  } // RE
-  else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
-      (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        return 587.33;
-  } // RE #
-  else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
-      (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        return 622.25;
-  } // MI
-  else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
-      (mouseY >= cardY+50) && (mouseY <= cardY+50+30)){
-        return 659.26;
-  } // FA
-  else if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
-      (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        return 698.46;
-  } // FA #
-  else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
-      (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        return 739.99;
-  } // SOL
-  else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
-      (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        return 783.99;
-  } // SOL #
-  else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
-      (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        return 830.61;
-  } // LA
-  else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
-      (mouseY >= cardY+50+interlineado) && (mouseY <= cardY+50+30+interlineado)){
-        return 880.00;
-  } // LA #
-  else if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
-      (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        return 932.33;
-  } // SI
-  else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
-      (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        return 987.77;
-  } // DO (agudo)
-  else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
-      (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        return 1046.50;
-  } // DO # (agudo)
-  else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
-      (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        return 1108.73;
-  } // RE (agudo)
-  else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
-      (mouseY >= cardY+50+interlineado*2) && (mouseY <= cardY+50+30+interlineado*2)){
-        return 1174.66;
-  } // RE # (agudo)
-  else if ((mouseX >= cardX+xInicial) && (mouseX <= cardX+xInicial+100) &&
-      (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        return 1244.51;
-  } // MI (agudo)
-  else if ((mouseX >= cardX+xInicial+espaciado) && (mouseX <= cardX+xInicial+espaciado+100) &&
-      (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        return 1318.51;
-  } // FA (agudo)
-  else if ((mouseX >= cardX+xInicial+espaciado*2) && (mouseX <= cardX+xInicial+espaciado*2+100) &&
-      (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        return 1396.91;
-  } // FA # (agudo)
-  else if ((mouseX >= cardX+xInicial+espaciado*3) && (mouseX <= cardX+xInicial+espaciado*3+100) &&
-      (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        return 1479.98;
-  }// PAUSA
-  else if ((mouseX >= cardX+xInicial+espaciado*4) && (mouseX <= cardX+xInicial+espaciado*4+100) &&
-      (mouseY >= cardY+50+interlineado*3) && (mouseY <= cardY+50+30+interlineado*3)){
-        return 3000;
-  }
-  return 0.0;
 }
 
 void serialEvent(Serial p) {

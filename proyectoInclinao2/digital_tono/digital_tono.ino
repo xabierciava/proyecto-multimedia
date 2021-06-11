@@ -20,17 +20,17 @@ void loop()
 {
   while(Serial.available()) { // If data is available to read,
     s = Serial.readStringUntil('\n'); // read it and store it in val
-    int puerto = s.substring(0, s.indexOf(',')).toInt();
-    float tono = s.substring(s.indexOf(',')+3).toFloat();
-    if (puerto == 3) {
-      tonoIndice.play(NOTE_B3);
-    } else if (puerto == 5) {
-      tonoCorazon.play(NOTE_B3);
-    } else if (puerto == 6) {
-      tonoAnular.play(NOTE_B3);
-    } else if (puerto == 9) {
-      tonoMenique.play(NOTE_B3);
-    }
+    int dedo = s.substring(0, s.indexOf(',')).toInt();
+    float tono = s.substring(s.indexOf(',')+1).toFloat();
     
+    if (dedo == 2) {
+      tonoIndice.play(tono);
+    } else if (dedo == 3) {
+      tonoCorazon.play(tono);
+    } else if (dedo == 4) {
+      tonoAnular.play(tono);
+    } else if (dedo == 5) {
+      tonoMenique.play(tono);
+    }
   }
 }
